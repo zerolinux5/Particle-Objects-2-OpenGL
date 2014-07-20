@@ -23,6 +23,7 @@
 		EA143BA9197B73FB0026D321 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA143BA8197B73FB0026D321 /* GLKit.framework */; };
 		EA143BAB197B74140026D321 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA143BAA197B74140026D321 /* MainStoryboard.storyboard */; };
 		EA143BAE197B744D0026D321 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA143BAD197B744D0026D321 /* MainViewController.m */; };
+		EA3E49E1197B762A00EE7657 /* EmitterObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3E49E0197B762A00EE7657 /* EmitterObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		EA143BAA197B74140026D321 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		EA143BAC197B744D0026D321 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		EA143BAD197B744D0026D321 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		EA3E49DF197B762A00EE7657 /* EmitterObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmitterObject.h; sourceTree = "<group>"; };
+		EA3E49E0197B762A00EE7657 /* EmitterObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmitterObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +130,8 @@
 				EA143BAA197B74140026D321 /* MainStoryboard.storyboard */,
 				EA143BAC197B744D0026D321 /* MainViewController.h */,
 				EA143BAD197B744D0026D321 /* MainViewController.m */,
+				EA3E49DF197B762A00EE7657 /* EmitterObject.h */,
+				EA3E49E0197B762A00EE7657 /* EmitterObject.m */,
 			);
 			path = Particles2;
 			sourceTree = "<group>";
@@ -259,6 +264,7 @@
 				EA143B88197B73B10026D321 /* AppDelegate.m in Sources */,
 				EA143BAE197B744D0026D321 /* MainViewController.m in Sources */,
 				EA143B84197B73B10026D321 /* main.m in Sources */,
+				EA3E49E1197B762A00EE7657 /* EmitterObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,6 +461,7 @@
 				EA143BA2197B73B10026D321 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EA143BA3197B73B10026D321 /* Build configuration list for PBXNativeTarget "Particles2Tests" */ = {
 			isa = XCConfigurationList;
@@ -463,6 +470,7 @@
 				EA143BA5197B73B10026D321 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

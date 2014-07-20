@@ -7,6 +7,14 @@
 //
 
 #import "MainViewController.h"
+#import "EmitterObject.h"
+
+@interface MainViewController ()
+
+// Properties
+@property (strong) EmitterObject* emitter;
+
+@end
 
 @implementation MainViewController
 
@@ -21,12 +29,29 @@
     GLKView* view = (GLKView*)self.view;
     view.context = context;
     
+    // Set up Emitter
+    self.emitter = [[EmitterObject alloc] initEmitterObject];
+    
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
+    //adding the color blue
     glClearColor(0.53, 0.81, 0.92, 1.00);
     glClear(GL_COLOR_BUFFER_BIT);
+    
+    // Create Projection Matrix
+    float aspectRatio = view.frame.size.width / view.frame.size.height;
+    GLKMatrix4 projectionMatrix = GLKMatrix4MakeScale(1.0f, aspectRatio, 1.0f);
+    
+    // Render Emitter
+    [self.emitter renderWithProjection:projectionMatrix];
+}
+
+- (void)update
+{
+    // Update Emitter
+    [self.emitter updateLifeCycle:self.timeSinceLastUpdate];
 }
 
 @end

@@ -12,9 +12,12 @@ static const char* EmitterFS = STRINGIFY
  uniform highp float     u_Time;
  uniform highp vec3      u_eColorStart;
  uniform highp vec3      u_eColorEnd;
+ uniform sampler2D       u_Texture;
  
  void main(void)
 {
+    highp vec4 texture = texture2D(u_Texture, gl_PointCoord);
+    
     // Color
     highp vec4 color = vec4(1.0);
     
@@ -39,7 +42,7 @@ static const char* EmitterFS = STRINGIFY
     color.rgb = clamp(color.rgb, vec3(0.0), vec3(1.0));
     
     // Required OpenGL ES 2.0 outputs
-    gl_FragColor = color;
+    gl_FragColor = texture * color;
 }
  
  );

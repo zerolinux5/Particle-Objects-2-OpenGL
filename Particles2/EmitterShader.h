@@ -32,6 +32,7 @@
 @property (readwrite) GLint     u_eSizeEnd;
 @property (readwrite) GLint     u_eColorStart;
 @property (readwrite) GLint     u_eColorEnd;
+@property (readwrite) GLint u_Texture;
 
 // Methods
 - (void)loadShader;

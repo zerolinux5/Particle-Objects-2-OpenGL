@@ -10,7 +10,7 @@
 
 @interface EmitterObject : NSObject
 
-- (id)initEmitterObject;
+- (id)initWithTexture:(NSString *)fileName;
 - (void)renderWithProjection:(GLKMatrix4)projectionMatrix;
 - (void)updateLifeCycle:(float)timeElapsed;
 

@@ -41,6 +41,8 @@
     self.u_eSizeEnd = glGetUniformLocation(self.program, "u_eSizeEnd");
     self.u_eColorStart = glGetUniformLocation(self.program, "u_eColorStart");
     self.u_eColorEnd = glGetUniformLocation(self.program, "u_eColorEnd");
+    
+    self.u_Texture = glGetUniformLocation(self.program, "u_Texture");
 }
 
 @end

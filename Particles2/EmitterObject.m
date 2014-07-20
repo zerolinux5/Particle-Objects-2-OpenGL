@@ -51,7 +51,7 @@ Emitter;
     float       _time;
 }
 
-- (id)initEmitterObject
+- (id)initWithTexture:(NSString*)fileName
 {
     if(self = [super init])
     {
@@ -62,6 +62,9 @@ Emitter;
         
         // Load Shader
         [self loadShader];
+        
+        // Load Texture
+        [self loadTexture:fileName];
         
         // Load Particle System
         [self loadParticleSystem];
@@ -82,6 +85,7 @@ Emitter;
     glUniform1f(self.shader.u_eSizeEnd, self.emitter.eSizeEnd);
     glUniform3f(self.shader.u_eColorStart, self.emitter.eColorStart.r, self.emitter.eColorStart.g, self.emitter.eColorStart.b);
     glUniform3f(self.shader.u_eColorEnd, self.emitter.eColorEnd.r, self.emitter.eColorEnd.g, self.emitter.eColorEnd.b);
+    glUniform1i(self.shader.u_Texture, 0);
     
     // Attributes
     glEnableVertexAttribArray(self.shader.a_pID);
@@ -187,6 +191,24 @@ Emitter;
     glGenBuffers(1, &particleBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, particleBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(self.emitter.eParticles), self.emitter.eParticles, GL_STATIC_DRAW);
+}
+
+- (void)loadTexture:(NSString *)fileName
+{
+    NSDictionary* options = [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSNumber numberWithBool:YES],
+                             GLKTextureLoaderOriginBottomLeft,
+                             nil];
+    
+    NSError* error;
+    NSString* path = [[NSBundle mainBundle] pathForResource:fileName ofType:nil];
+    GLKTextureInfo* texture = [GLKTextureLoader textureWithContentsOfFile:path options:options error:&error];
+    if(texture == nil)
+    {
+        NSLog(@"Error loading file: %@", [error localizedDescription]);
+    }
+    
+    glBindTexture(GL_TEXTURE_2D, texture.name);
 }
 
 @end

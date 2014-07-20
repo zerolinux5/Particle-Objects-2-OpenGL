@@ -50,6 +50,7 @@ Emitter;
     GLKVector2  _gravity;
     float       _life;
     float       _time;
+    GLuint      _particleBuffer;
 }
 
 - (id)initWithTexture:(NSString *)fileName at:(GLKVector2)position
@@ -60,6 +61,7 @@ Emitter;
         _gravity = GLKVector2Make(0.0f, 0.0f);
         _life = 0.0f;
         _time = 0.0f;
+        _particleBuffer = 0;
         
         // Load Shader
         [self loadShader];
@@ -75,6 +77,9 @@ Emitter;
 
 - (void)renderWithProjection:(GLKMatrix4)projectionMatrix
 {
+    // Switch Buffers
+    glBindBuffer(GL_ARRAY_BUFFER, _particleBuffer);
+    
     // Uniforms
     glUniformMatrix4fv(self.shader.u_ProjectionMatrix, 1, 0, projectionMatrix.m);
     glUniform2f(self.shader.u_Gravity, _gravity.x, _gravity.y);
@@ -191,9 +196,8 @@ Emitter;
     // 7
     // Set Emitter & VBO
     self.emitter = newEmitter;
-    GLuint particleBuffer = 0;
-    glGenBuffers(1, &particleBuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, particleBuffer);
+    glGenBuffers(1, &_particleBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, _particleBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(self.emitter.eParticles), self.emitter.eParticles, GL_STATIC_DRAW);
 }
 

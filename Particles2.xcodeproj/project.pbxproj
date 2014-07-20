@@ -24,6 +24,11 @@
 		EA143BAB197B74140026D321 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA143BAA197B74140026D321 /* MainStoryboard.storyboard */; };
 		EA143BAE197B744D0026D321 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA143BAD197B744D0026D321 /* MainViewController.m */; };
 		EA3E49E1197B762A00EE7657 /* EmitterObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3E49E0197B762A00EE7657 /* EmitterObject.m */; };
+		EA3E49EC197B78B300EE7657 /* ShaderProcessor.mm in Sources */ = {isa = PBXBuildFile; fileRef = EA3E49E7197B78B300EE7657 /* ShaderProcessor.mm */; };
+		EA3E49ED197B78B300EE7657 /* texture_16.png in Resources */ = {isa = PBXBuildFile; fileRef = EA3E49E9197B78B300EE7657 /* texture_16.png */; };
+		EA3E49EE197B78B300EE7657 /* texture_32.png in Resources */ = {isa = PBXBuildFile; fileRef = EA3E49EA197B78B300EE7657 /* texture_32.png */; };
+		EA3E49EF197B78B300EE7657 /* texture_64.png in Resources */ = {isa = PBXBuildFile; fileRef = EA3E49EB197B78B300EE7657 /* texture_64.png */; };
+		EA3E49F2197B78DF00EE7657 /* EmitterShader.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3E49F1197B78DF00EE7657 /* EmitterShader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +65,15 @@
 		EA143BAD197B744D0026D321 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		EA3E49DF197B762A00EE7657 /* EmitterObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmitterObject.h; sourceTree = "<group>"; };
 		EA3E49E0197B762A00EE7657 /* EmitterObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmitterObject.m; sourceTree = "<group>"; };
+		EA3E49E2197B77A900EE7657 /* Emitter.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Emitter.vsh; sourceTree = "<group>"; };
+		EA3E49E3197B780600EE7657 /* Emitter.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Emitter.fsh; sourceTree = "<group>"; };
+		EA3E49E6197B78B300EE7657 /* ShaderProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderProcessor.h; sourceTree = "<group>"; };
+		EA3E49E7197B78B300EE7657 /* ShaderProcessor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShaderProcessor.mm; sourceTree = "<group>"; };
+		EA3E49E9197B78B300EE7657 /* texture_16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture_16.png; sourceTree = "<group>"; };
+		EA3E49EA197B78B300EE7657 /* texture_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture_32.png; sourceTree = "<group>"; };
+		EA3E49EB197B78B300EE7657 /* texture_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture_64.png; sourceTree = "<group>"; };
+		EA3E49F0197B78DF00EE7657 /* EmitterShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmitterShader.h; sourceTree = "<group>"; };
+		EA3E49F1197B78DF00EE7657 /* EmitterShader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmitterShader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +137,7 @@
 		EA143B7D197B73B10026D321 /* Particles2 */ = {
 			isa = PBXGroup;
 			children = (
+				EA3E49E4197B78B300EE7657 /* Resources */,
 				EA143B86197B73B10026D321 /* AppDelegate.h */,
 				EA143B87197B73B10026D321 /* AppDelegate.m */,
 				EA143B89197B73B10026D321 /* Images.xcassets */,
@@ -132,6 +147,10 @@
 				EA143BAD197B744D0026D321 /* MainViewController.m */,
 				EA3E49DF197B762A00EE7657 /* EmitterObject.h */,
 				EA3E49E0197B762A00EE7657 /* EmitterObject.m */,
+				EA3E49E2197B77A900EE7657 /* Emitter.vsh */,
+				EA3E49E3197B780600EE7657 /* Emitter.fsh */,
+				EA3E49F0197B78DF00EE7657 /* EmitterShader.h */,
+				EA3E49F1197B78DF00EE7657 /* EmitterShader.m */,
 			);
 			path = Particles2;
 			sourceTree = "<group>";
@@ -163,6 +182,34 @@
 				EA143B99197B73B10026D321 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EA3E49E4197B78B300EE7657 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EA3E49E5197B78B300EE7657 /* ShaderProcessor */,
+				EA3E49E8197B78B300EE7657 /* Textures */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		EA3E49E5197B78B300EE7657 /* ShaderProcessor */ = {
+			isa = PBXGroup;
+			children = (
+				EA3E49E6197B78B300EE7657 /* ShaderProcessor.h */,
+				EA3E49E7197B78B300EE7657 /* ShaderProcessor.mm */,
+			);
+			path = ShaderProcessor;
+			sourceTree = "<group>";
+		};
+		EA3E49E8197B78B300EE7657 /* Textures */ = {
+			isa = PBXGroup;
+			children = (
+				EA3E49E9197B78B300EE7657 /* texture_16.png */,
+				EA3E49EA197B78B300EE7657 /* texture_32.png */,
+				EA3E49EB197B78B300EE7657 /* texture_64.png */,
+			);
+			path = Textures;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,6 +287,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA3E49ED197B78B300EE7657 /* texture_16.png in Resources */,
+				EA3E49EF197B78B300EE7657 /* texture_64.png in Resources */,
+				EA3E49EE197B78B300EE7657 /* texture_32.png in Resources */,
 				EA143BAB197B74140026D321 /* MainStoryboard.storyboard in Resources */,
 				EA143B82197B73B10026D321 /* InfoPlist.strings in Resources */,
 				EA143B8A197B73B10026D321 /* Images.xcassets in Resources */,
@@ -264,6 +314,8 @@
 				EA143B88197B73B10026D321 /* AppDelegate.m in Sources */,
 				EA143BAE197B744D0026D321 /* MainViewController.m in Sources */,
 				EA143B84197B73B10026D321 /* main.m in Sources */,
+				EA3E49F2197B78DF00EE7657 /* EmitterShader.m in Sources */,
+				EA3E49EC197B78B300EE7657 /* ShaderProcessor.mm in Sources */,
 				EA3E49E1197B762A00EE7657 /* EmitterObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

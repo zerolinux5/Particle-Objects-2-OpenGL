@@ -32,6 +32,7 @@ typedef struct Emitter
     float       eSizeEnd;
     GLKVector3  eColorStart;
     GLKVector3  eColorEnd;
+    GLKVector2  ePosition;
 }
 Emitter;
 
@@ -51,7 +52,7 @@ Emitter;
     float       _time;
 }
 
-- (id)initWithTexture:(NSString*)fileName
+- (id)initWithTexture:(NSString *)fileName at:(GLKVector2)position
 {
     if(self = [super init])
     {
@@ -67,7 +68,7 @@ Emitter;
         [self loadTexture:fileName];
         
         // Load Particle System
-        [self loadParticleSystem];
+        [self loadParticleSystem:position];
     }
     return self;
 }
@@ -86,6 +87,7 @@ Emitter;
     glUniform3f(self.shader.u_eColorStart, self.emitter.eColorStart.r, self.emitter.eColorStart.g, self.emitter.eColorStart.b);
     glUniform3f(self.shader.u_eColorEnd, self.emitter.eColorEnd.r, self.emitter.eColorEnd.g, self.emitter.eColorEnd.b);
     glUniform1i(self.shader.u_Texture, 0);
+    glUniform2f(self.shader.u_ePosition, self.emitter.ePosition.x, self.emitter.ePosition.y);
     
     // Attributes
     glEnableVertexAttribArray(self.shader.a_pID);
@@ -112,13 +114,14 @@ Emitter;
     glDisableVertexAttribArray(self.shader.a_pColorOffset);
 }
 
-- (void)updateLifeCycle:(float)timeElapsed
+- (BOOL)updateLifeCycle:(float)timeElapsed
 {
     _time += timeElapsed;
     
-    if(_time > _life)
-        _time = 0.0f;
-
+    if(_time < _life)
+        return YES;
+    else
+        return NO;
 }
 
 - (void)loadShader
@@ -135,7 +138,7 @@ Emitter;
     return (((float) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * range) + min;
 }
 
-- (void)loadParticleSystem
+- (void)loadParticleSystem:(GLKVector2)position
 {
     // 2
     Emitter newEmitter = {0.0f};
@@ -175,6 +178,7 @@ Emitter;
     newEmitter.eSizeEnd = 8.00f;                                    // Fragment end size
     newEmitter.eColorStart = GLKVector3Make(1.00f, 0.50f, 0.00f);   // Fragment start color
     newEmitter.eColorEnd = GLKVector3Make(0.25f, 0.00f, 0.00f);     // Fragment end color
+    newEmitter.ePosition = position;                                // Source position
     
     // 6
     // Set global factors

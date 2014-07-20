@@ -12,7 +12,7 @@
 @interface MainViewController ()
 
 // Properties
-@property (strong) EmitterObject* emitter;
+@property (strong) NSMutableArray* emitters;
 
 @end
 
@@ -29,8 +29,8 @@
     GLKView* view = (GLKView*)self.view;
     view.context = context;
     
-    // Set up Emitter
-    self.emitter = [[EmitterObject alloc] initWithTexture:@"texture_64.png"];
+    // Set up Emitters
+    self.emitters = [NSMutableArray array];
     
 }
 
@@ -48,14 +48,54 @@
     float aspectRatio = view.frame.size.width / view.frame.size.height;
     GLKMatrix4 projectionMatrix = GLKMatrix4MakeScale(1.0f, aspectRatio, 1.0f);
     
-    // Render Emitter
-    [self.emitter renderWithProjection:projectionMatrix];
+    // Render Emitters
+     if([self.emitters count] != 0)
+    {
+        for(EmitterObject* emitter in self.emitters)
+        {
+            [emitter renderWithProjection:projectionMatrix];
+        }
+    }
 }
 
 - (void)update
 {
-    // Update Emitter
-    [self.emitter updateLifeCycle:self.timeSinceLastUpdate];
+    // Update Emitters
+    if([self.emitters count] != 0)
+    {
+        NSMutableArray* deadEmitters = [NSMutableArray array];
+        
+        for(EmitterObject* emitter in self.emitters)
+        {
+            BOOL alive = [emitter updateLifeCycle:self.timeSinceLastUpdate];
+            
+            if(!alive)
+                [deadEmitters addObject:emitter];
+        }
+        
+        for(EmitterObject* emitter in deadEmitters)
+            [self.emitters removeObject:emitter];
+    }
 }
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    // 1
+    // Get touch point and screen information
+    CGPoint touchPoint = [touches.anyObject locationInView:self.view];
+    CGPoint glPoint = CGPointMake(touchPoint.x/self.view.frame.size.width, touchPoint.y/self.view.frame.size.height);
+    
+    // 2
+    // Convert touch point to GL position
+    float aspectRatio = self.view.frame.size.width / self.view.frame.size.height;
+    float x = (glPoint.x * 2.0f) - 1.0f;
+    float y = ((glPoint.y * 2.0f) - 1.0f) * (-1.0f/aspectRatio);
+    
+    // 3
+    // Create a new emitter object
+    EmitterObject* emitter = [[EmitterObject alloc] initWithTexture:@"texture_64.png" at:GLKVector2Make(x, y)];
+    [self.emitters addObject:emitter];
+}
+
 
 @end

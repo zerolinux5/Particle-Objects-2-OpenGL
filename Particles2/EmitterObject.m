@@ -28,8 +28,10 @@ typedef struct Emitter
     float       eRadius;
     float       eVelocity;
     float       eDecay;
-    float       eSize;
-    GLKVector3  eColor;
+    float       eSizeStart;
+    float       eSizeEnd;
+    GLKVector3  eColorStart;
+    GLKVector3  eColorEnd;
 }
 Emitter;
 
@@ -76,8 +78,10 @@ Emitter;
     glUniform1f(self.shader.u_eRadius, self.emitter.eRadius);
     glUniform1f(self.shader.u_eVelocity, self.emitter.eVelocity);
     glUniform1f(self.shader.u_eDecay, self.emitter.eDecay);
-    glUniform1f(self.shader.u_eSize, self.emitter.eSize);
-    glUniform3f(self.shader.u_eColor, self.emitter.eColor.r, self.emitter.eColor.g, self.emitter.eColor.b);
+    glUniform1f(self.shader.u_eSizeStart, self.emitter.eSizeStart);
+    glUniform1f(self.shader.u_eSizeEnd, self.emitter.eSizeEnd);
+    glUniform3f(self.shader.u_eColorStart, self.emitter.eColorStart.r, self.emitter.eColorStart.g, self.emitter.eColorStart.b);
+    glUniform3f(self.shader.u_eColorEnd, self.emitter.eColorEnd.r, self.emitter.eColorEnd.g, self.emitter.eColorEnd.b);
     
     // Attributes
     glEnableVertexAttribArray(self.shader.a_pID);
@@ -163,8 +167,10 @@ Emitter;
     newEmitter.eRadius = 0.75f;                                     // Blast radius
     newEmitter.eVelocity = 3.00f;                                   // Explosion velocity
     newEmitter.eDecay = 2.00f;                                      // Explosion decay
-    newEmitter.eSize = 32.00f;                                      // Fragment size
-    newEmitter.eColor = GLKVector3Make(1.00f, 0.50f, 0.00f);        // Fragment color
+    newEmitter.eSizeStart = 32.00f;                                 // Fragment start size
+    newEmitter.eSizeEnd = 8.00f;                                    // Fragment end size
+    newEmitter.eColorStart = GLKVector3Make(1.00f, 0.50f, 0.00f);   // Fragment start color
+    newEmitter.eColorEnd = GLKVector3Make(0.25f, 0.00f, 0.00f);     // Fragment end color
     
     // 6
     // Set global factors

@@ -28,8 +28,10 @@
 @property (readwrite) GLint     u_eRadius;
 @property (readwrite) GLint     u_eVelocity;
 @property (readwrite) GLint     u_eDecay;
-@property (readwrite) GLint     u_eSize;
-@property (readwrite) GLint     u_eColor;
+@property (readwrite) GLint     u_eSizeStart;
+@property (readwrite) GLint     u_eSizeEnd;
+@property (readwrite) GLint     u_eColorStart;
+@property (readwrite) GLint     u_eColorEnd;
 
 // Methods
 - (void)loadShader;
